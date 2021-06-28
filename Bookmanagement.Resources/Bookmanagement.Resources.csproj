@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bookmanagement.Core\Bookmanagement.Core.csproj" />
+    <ProjectReference Include="..\Bookmanagement.Entities\Bookmanagement.Entities.csproj" />
+    <ProjectReference Include="..\Bookmanagement.Services\Bookmanagement.Services.csproj" />
+  </ItemGroup>
+
+</Project>

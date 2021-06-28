@@ -1,0 +1,66 @@
+﻿@model Bookmanagement.Core.BookEntity.Adminentity
+
+<!DOCTYPE html>
+<html>
+<head>
+    @section Scripts
+    {
+        <partial name="_ValidationScriptsPartial">
+
+    }
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js"></script>
+    <title>
+        Admin page
+    </title>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row vertical-offset-100">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Admin Login</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @using (Html.BeginForm("Admincheck", "Book", FormMethod.Post, new { id = "loginform" }))
+                            {
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.admin, new { @id = "admin", @class = "form-control", placeholder = "Username" })
+                                    @Html.ValidationMessageFor(m => m.admin, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.PasswordFor(m => m.password, new { @class = "form-control", placeholder = "Password" })
+                                    @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" onclick="SubmitDetails()" class="btn-block btn btn-lg btn-success">Login</button>
+                                </div>
+                            }
+                        </fieldset>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+@if (TempData["failed"] != null)
+{
+    <script>
+   alert("@Html.Raw(@TempData["failed"].ToString()) ");
+    </script>
+}
+@if (TempData["session"] != null)
+{
+  <script type="text/javascript">
+    alert("@TempData["session"]");
+  </script>
+}
+

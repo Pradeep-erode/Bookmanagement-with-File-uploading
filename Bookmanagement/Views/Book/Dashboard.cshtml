@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Bookmanagement.Core.BookEntity.Bookentity>
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Dashboard</h1>
+<br>
+<div class="form-group">
+    @Html.ActionLink("Addbook", "Newbook", "Book", new { }, new { @class = "btn-info p-2 btn btn-group-lg" })
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stringAuthor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stringAuthor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Newbook", "Book", new { bookid = item.BookId }, new { @class = "btn btn-group-lg btn-warning p-2" })
+                    @Html.ActionLink("Delete", "Deletebook", "Book", new { bookid = item.BookId }, new { @class = "btn btn-group-lg btn-danger p-2", onclick = "return confirm('Are you want to delete');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (TempData["failed"] != null)
+{
+    <script>
+   alert("@Html.Raw(@TempData["failed"].ToString()) ");
+    </script>
+}
+
+@if (TempData["bookadded"] != null)
+{
+    <script>
+   alert("@Html.Raw(@TempData["bookadded"].ToString()) ");
+    </script>
+}

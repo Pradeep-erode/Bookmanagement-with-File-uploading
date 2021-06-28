@@ -1,0 +1,77 @@
+﻿@model Bookmanagement.Core.BookEntity.Bookentity
+<!Doctype html>
+<html>
+<head>
+
+    <title>Addbook page</title>
+    @section Scripts
+    {
+        <partial name="_ValidationScriptsPartial">
+    }
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js"></script>
+</head>
+<body>
+    <div id="Editpage">
+        <div class="form-group">
+            @Html.ActionLink("Back-To-Dashboard", "Dashboard", "Book", "", new { @class = "btn-info btn btn-group-lg" })
+        </div>
+        <div>
+            @Html.ValidationSummary(false, "Fill the field", new { @class = "text-info" })
+            @using (Html.BeginForm("Addbookdetail", "Book",FormMethod.Post, new { @id = "bookaddform" }))
+            {
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Title, new { @id = "titlecheck", @class = "h-70 w-50" })
+                    @Html.ValidationMessageFor(m => m.Title)
+                </div>
+                <div class="form-group">
+                    @Html.DropDownList("Author", new SelectList(@Model.Authorlists, "AuthorId", "Authorname"), "select-Author", new { @class = "h-70 w-50" })
+                    @Html.ValidationMessageFor(m => m.Author)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Price, new { @id = "pricezero", @class = "h-70 w-50" })
+                    @Html.ValidationMessageFor(m => m.Price)
+                </div>
+                @Html.HiddenFor(m => m.BookId)
+                @if (Model.BookId > 0)
+                {
+                    <button type="submit" onclick="SubmitDetails()" id="Model.BookId" class="btn-success btn btn-group-lg">Update</button>
+                }
+                else
+                {
+                    <button type="submit" onclick="SubmitDetails()" id="Model.BookId" class="btn-success btn btn-group-lg">Addbook</button>
+                }
+                <button type="reset" id="BookId" onclick="makezero()" class="btn-dark btn btn-group-lg">Reset</button>
+            }
+        </div>
+    </div>
+
+</body>
+</html>
+
+@if (TempData["validfailed"] != null)
+{
+    <script>
+   alert("@Html.Raw(@TempData["validfailed"].ToString()) ");
+    </script>
+}
+@if (TempData["nodata"] != null)
+{
+    <script type="text/javascript">
+        alert("@TempData["nodata"]");
+    </script>
+}
+<script>
+    $(function () {
+        if ($("#BookId").val() == 0) {
+            $("#pricezero").val("");
+        }
+    });
+
+    //function makezero()
+    //{
+    //    $("#BookId:text").val("");
+    //};
+
+
+</script>
