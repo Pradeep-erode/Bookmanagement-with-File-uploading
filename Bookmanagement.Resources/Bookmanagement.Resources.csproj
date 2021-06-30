@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Bookmanagement.Core\Bookmanagement.Core.csproj" />
     <ProjectReference Include="..\Bookmanagement.Entities\Bookmanagement.Entities.csproj" />
     <ProjectReference Include="..\Bookmanagement.Services\Bookmanagement.Services.csproj" />

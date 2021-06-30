@@ -1,0 +1,77 @@
+﻿@model Bookmanagement.Core.FilesEntity.Filesentity
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Files management
+    </title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    <h1>Create</h1>
+
+    <h4>ImageModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            @using (Html.BeginForm("FilesUpload", "Files",FormMethod.Post,new {  enctype="multipart/form-data", @id = "formfirst" }))
+            {
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    @Html.Label("Filename", "Filename", new { @class = "control-label" })
+                    @Html.TextBoxFor(m=>m.filesname,new { @class="form-control", id = "validtext" })
+                    @Html.ValidationMessageFor(m=>m.filesname)
+                </div>
+                <div class="form-group">
+                    @Html.Label("File choose", "File choose", new { @class = "control-label" })
+                    @* we can also use this => @Html.EditorFor(m=>m.files)*@
+                    <input asp-for="files" accept="image/*" class="">
+                    @Html.ValidationMessageFor(m => m.files)
+                </div>
+                <div class="form-group">
+                    <input type="submit" onclick="Validate()" class="btn btn-primary" />
+                </div>
+             }
+        </div>
+    </div>
+    @Html.ActionLink("Dashboard", "Filesdashboard","Files")
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>
+<script type="text/javascript">
+
+    $(function () {
+        $("#formfirst").validate({
+            rules: {
+                filesname:
+                {
+                    required: true
+                }
+                
+            },
+            messages:
+            {
+                filesname:
+                {
+                    filesname: "file is required"
+                }
+            }
+        });
+    });
+    //function Validate() {
+    //    if ($("#formfirst").validate()) {
+    //        var isValid = false;
+    //        var regex = /^[a-zA-Z]+$/;
+    //        isValid = regex.test(document.getElementById("=validtext").value);
+    //        document.getElementById("spnError").style.display = !isValid ? "block" : "none";
+    //        $("#formfirst").submit();
+    //    }
+    //}
+</script>
+

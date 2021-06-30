@@ -24,6 +24,10 @@
       {
          "Name": "[dbo].[Employeelogin]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Filesmanagement]",
+         "ObjectType": 0
       }
    ],
    "UiHint": "(localdb)\\MSSQLLocalDB.Studentfirstsample",

@@ -17,7 +17,6 @@ namespace Bookmanagement.Entities
             : base(options)
         {
         }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -26,10 +25,10 @@ namespace Bookmanagement.Entities
                 optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Studentfirstsample");
             }
         }
-
         public virtual DbSet<BookAuthors> BookAuthors { get; set; }
         public virtual DbSet<Bookmanagement> Bookmanagement { get; set; }
         public virtual DbSet<Employeelogin> Employeelogin { get; set; }
+        public virtual DbSet<Filesmanagement> Filesmanagement { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,6 +53,15 @@ namespace Bookmanagement.Entities
                 entity.Property(e => e.Password).IsUnicode(false);
 
                 entity.Property(e => e.Username).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Filesmanagement>(entity =>
+            {
+                entity.Property(e => e.CreatedTimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Filesname).IsUnicode(false);
+
+                entity.Property(e => e.UpdatedTimeStamp).HasDefaultValueSql("(getdate())");
             });
 
             OnModelCreatingPartial(modelBuilder);
